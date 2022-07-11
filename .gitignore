@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!SavedVariables/Auctioneer.lua
+!SavedVariables/aux-addon.lua
+!Turtle WoW/Thalatar/SavedVariables/LazyScript.lua
+!macros-cache.txt
