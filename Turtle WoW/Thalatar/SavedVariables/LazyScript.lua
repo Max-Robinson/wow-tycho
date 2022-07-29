@@ -28,21 +28,6 @@ lsConf = {
 				["loadedDefaultForms"] = true,
 				["debug"] = false,
 				["healthHistorySize"] = 5,
-				["Immunities"] = {
-					["Rend"] = {
-						["Sneed's Shredder"] = true,
-						["Remote-Controlled Golem"] = true,
-						["Apprentice Training Dummy"] = true,
-						["Befouled Water Elemental"] = true,
-						["Living Flame"] = true,
-						["Burning Destroyer"] = true,
-					},
-					["Intimidating Shout"] = {
-						["Remote-Controlled Golem"] = true,
-						["Gilnid"] = true,
-						["Mr. Smite"] = true,
-					},
-				},
 				["forms"] = {
 					["ThunderClap"] = {
 						[1] = "callForm=BattleCommon",
@@ -54,20 +39,10 @@ lsConf = {
 						[2] = "battle-echo=Battle Stance!-ifNotInCooldown=charge-ifNotStance=battle",
 						[3] = "charge-ifNotInCooldown=charge",
 					},
-					["Buff"] = {
-						[1] = "findHerbs",
-						[2] = "#use=Strong Troll's Blood Potion-ifNotPlayerHasBuffTitle=Regeneration",
-						[3] = "use=Weak Troll's Blood Potion-ifNotPlayerHasBuffTitle=Regeneration",
-						[4] = "use=Elixir of Minor Fortitude-ifNotPlayerHasBuffTitle=Health",
-						[5] = "use=Elixir of Minor Defense-ifNotPlayerHasBuffTitle=Lesser Armor",
-						[6] = "use=Elixir of Lion's Strength-ifNotPlayerHasBuffTitle=Lesser Strength",
-						[7] = "callForm=EquipShield",
-						[8] = "applyMainHandBuff=Rough Weightstone-ifNotPlayerHasBuffTitle=Enhance Blunt Weapon",
-						[9] = "callForm=EquipTwoHandWeapon",
-						[10] = "applyMainHandBuff=Rough Sharpening Stone-ifNotPlayerHasBuffTitle=Sharpen Blade",
-						[11] = "use=Rumsey Rum Light-ifNotPlayerHasBuffTitle=Rumsey Rum Light",
-						[12] = "use=Crocolisk Gumbo-ifNotPlayerHasBuffTitle=Well Fed",
-						[13] = "#use=Goretusk Liver Pie-ifNotPlayerHasBuffTitle=Well Fed",
+					["Cleave"] = {
+						[1] = "callForm=BattleCommon",
+						[2] = "# Cleave 20 rage",
+						[3] = "cleave-echo=Cleave!-ifPlayer>45rage-ifPlayerHasBuff=battleShout",
 					},
 					["Execute"] = {
 						[1] = "battle-sayInSay=Battle Stance!-ifNotStance=battle",
@@ -135,15 +110,16 @@ lsConf = {
 						[37] = "# Demoralizing Shout 10 rage",
 						[38] = "demoShout-echo=Demoralizing Shout!-ifPlayer>35rage-ifPlayerHasBuff=battleShout-ifNotTargetHasDebuff=demoShout",
 					},
-					["Bandage"] = {
-						[1] = "targetUnit=player-use=Heavy Wool Bandage-targetLast-sayInSay=Bandaging!-ifNotPlayerHasDebuff=recentlyBandaged",
-					},
 					["SunderArmorHeroicStrike"] = {
 						[1] = "callForm=BattleCommon",
 						[2] = "# Sunder Armor 15 rage",
 						[3] = "sunder-echo=Sunder Armor!-ifPlayer>40rage-ifPlayerHasBuff=battleShout-ifTargetHasDebuff<5=sunder",
 						[4] = "# Heroic Strike 15 rage",
 						[5] = "heroicStrike-echo=Heroic Strike!-ifPlayer>40rage-ifTargetHasDebuff>5=sunder",
+					},
+					["Disarm"] = {
+						[1] = "disarm-echo=Disarm!-ifTargetBoss",
+						[2] = "disarm-echo=Disarm!-ifTargetElite",
 					},
 					["MockingBlowTaunt"] = {
 						[1] = "# Mocking Blow 10 rage 2min cooldown",
@@ -152,31 +128,20 @@ lsConf = {
 						[4] = "defensive-echo=Defensive Stance!-ifNotStance=defensive-ifInCooldown=mockingBlow-ifNotInCooldown=taunt",
 						[5] = "taunt-echo=Taunt!-ifNotInCooldown=taunt-ifStance=defensive",
 					},
-					["Cleave"] = {
-						[1] = "callForm=BattleCommon",
-						[2] = "# Cleave 20 rage",
-						[3] = "cleave-echo=Cleave!-ifPlayer>45rage-ifPlayerHasBuff=battleShout",
-					},
-					["Hamstring"] = {
-						[1] = "# Only switch stance to perform a Hamstring if rage is 25 or less.  Not worth losing rage to perform a Hamstring (in PvE)",
-						[2] = "battle-echo=Battle Stance!-ifNotStance=battle-ifPlayer<25rage",
-						[3] = "hamstring-echo=Hamstring!-ifStance=battle",
-					},
-					["ShieldBash"] = {
-						[1] = "defensive-echo=DefensiveStance!-ifStance=berserk",
-						[2] = "callForm=EquipShield",
-						[3] = "shieldBash-echo=Shield Bash!",
-					},
-					["Revenge"] = {
-						[1] = "defensive-echo=Defensive Stance!-ifNotStance=defensive",
-						[2] = "revenge-echo=Revenge!",
-					},
-					["Retaliation"] = {
-						[1] = "battle-echo=Battle Stance!-ifNotStance=battle",
-						[2] = "retaliation-echo=Retaliation!",
-					},
-					["EquipTwoHandWeapon"] = {
-						[1] = "equipMainHand=Taskmaster Axe-echo=Equipping 2 hander-ifNotEquipped=Taskmaster Axe",
+					["Buff"] = {
+						[1] = "findHerbs",
+						[2] = "#use=Strong Troll's Blood Potion-ifNotPlayerHasBuffTitle=Regeneration",
+						[3] = "use=Weak Troll's Blood Potion-ifNotPlayerHasBuffTitle=Regeneration",
+						[4] = "use=Elixir of Minor Fortitude-ifNotPlayerHasBuffTitle=Health",
+						[5] = "use=Elixir of Minor Defense-ifNotPlayerHasBuffTitle=Lesser Armor",
+						[6] = "use=Elixir of Lion's Strength-ifNotPlayerHasBuffTitle=Lesser Strength",
+						[7] = "callForm=EquipShield",
+						[8] = "applyMainHandBuff=Rough Weightstone-ifNotPlayerHasBuffTitle=Enhance Blunt Weapon",
+						[9] = "callForm=EquipTwoHandWeapon",
+						[10] = "applyMainHandBuff=Rough Sharpening Stone-ifNotPlayerHasBuffTitle=Sharpen Blade",
+						[11] = "use=Rumsey Rum Light-ifNotPlayerHasBuffTitle=Rumsey Rum Light",
+						[12] = "use=Crocolisk Gumbo-ifNotPlayerHasBuffTitle=Well Fed",
+						[13] = "#use=Goretusk Liver Pie-ifNotPlayerHasBuffTitle=Well Fed",
 					},
 					["tank"] = {
 						[1] = "berserkerRage-ifPlayerIs=Feared",
@@ -190,24 +155,59 @@ lsConf = {
 						[9] = "sunder-ifTargetHasDebuff<5=sunder",
 						[10] = "heroicStrike",
 					},
+					["Retaliation"] = {
+						[1] = "battle-echo=Battle Stance!-ifNotStance=battle",
+						[2] = "retaliation-echo=Retaliation!",
+					},
+					["Revenge"] = {
+						[1] = "defensive-echo=Defensive Stance!-ifNotStance=defensive",
+						[2] = "revenge-echo=Revenge!",
+					},
+					["ShieldBash"] = {
+						[1] = "defensive-echo=DefensiveStance!-ifStance=berserk",
+						[2] = "callForm=EquipShield",
+						[3] = "shieldBash-echo=Shield Bash!",
+					},
+					["EquipTwoHandWeapon"] = {
+						[1] = "equipMainHand=Taskmaster Axe-echo=Equipping 2 hander-ifNotEquipped=Taskmaster Axe",
+					},
+					["Bandage"] = {
+						[1] = "targetUnit=player-use=Heavy Wool Bandage-targetLast-sayInSay=Bandaging!-ifNotPlayerHasDebuff=recentlyBandaged",
+					},
 					["ShieldBlock"] = {
 						[1] = "callForm=EquipShield",
 						[2] = "defensive-echo=Defensive Stance!-ifNotStance=defensive",
 						[3] = "shieldBlock-echo=Shield Block!",
 					},
-					["Disarm"] = {
-						[1] = "disarm-echo=Disarm!-ifTargetBoss",
-						[2] = "disarm-echo=Disarm!-ifTargetElite",
+					["Hamstring"] = {
+						[1] = "# Only switch stance to perform a Hamstring if rage is 25 or less.  Not worth losing rage to perform a Hamstring (in PvE)",
+						[2] = "battle-echo=Battle Stance!-ifNotStance=battle-ifPlayer<25rage",
+						[3] = "hamstring-echo=Hamstring!-ifStance=battle",
 					},
 				},
-				["useImmunities"] = true,
+				["deathMinionIsVisible"] = true,
+				["mmIsVisible"] = true,
 				["autoTarget"] = true,
 				["showGankMessage"] = true,
-				["showActionAlways"] = true,
-				["minimapButtonPos"] = 342.6858498500802,
 				["minionHidesOutOfCombat"] = false,
-				["mmIsVisible"] = true,
-				["deathMinionIsVisible"] = true,
+				["minimapButtonPos"] = 342.6858498500802,
+				["showActionAlways"] = true,
+				["useImmunities"] = true,
+				["Immunities"] = {
+					["Rend"] = {
+						["Sneed's Shredder"] = true,
+						["Remote-Controlled Golem"] = true,
+						["Apprentice Training Dummy"] = true,
+						["Befouled Water Elemental"] = true,
+						["Living Flame"] = true,
+						["Burning Destroyer"] = true,
+					},
+					["Intimidating Shout"] = {
+						["Remote-Controlled Golem"] = true,
+						["Mr. Smite"] = true,
+						["Gilnid"] = true,
+					},
+				},
 			},
 		},
 	},
